@@ -58,9 +58,9 @@ function Example() {
         <App2></App2>
 
         <TextBoxK></TextBoxK>
-
+        <TableK></TableK>
         <div>
-          <TableK></TableK>
+
           <table {...getTableProps()} style={{ border: 'solid 1px black' }}>
             <thead>
             {headerGroups.map(headerGroup => (

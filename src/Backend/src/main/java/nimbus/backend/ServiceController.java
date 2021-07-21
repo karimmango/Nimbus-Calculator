@@ -1,8 +1,6 @@
-package Backend;
-
-import Model.Service;
+package nimbus.backend;
 import org.springframework.web.bind.annotation.*;
-
+import Backend.Model.Service;
 import java.util.Collection;
 import java.util.TreeMap;
 
