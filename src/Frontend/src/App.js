@@ -1,109 +1,98 @@
-import React, {useState, useEffect, Component} from 'react';
-import {useTable} from 'react-table';
-import {AdvancedChart, FundamentalData, MiniChart, SingleTicker, SymbolInfo, Ticker} from "react-tradingview-embed";
-import SimpleTextArea from './components/SimpleTextArea'
+import React, {Component} from 'react';
+import {AdvancedChart, SingleTicker, Ticker, TickerTape} from "react-tradingview-embed";
 import TableK from './components/table'
+import './App.css'
 
-const App = () => <AdvancedChart widgetProps={{"theme": "light  ", "symbol": "GNBUWETH", "interval": "1"}}/>;
+const App = () => <AdvancedChart widgetProps={{"theme": "light  ", "symbol": "WETHNBU", "interval": "1"}}/>;
 const App2 = () => <SingleTicker widgetProps={{"theme": "light", "symbol": "WETHNBU", "interval": "1"}}/>;
+const App3 = () => <SingleTicker widgetProps={{"theme": "light", "symbol": "GNBUWETH", "interval": "1"}}/>;
+const App4 = () => <TickerTape widgetProps={{"theme": "light", "symbol": "GNBUWETH", "interval": "1"}}/>;
 
 
 class Example extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            columns: [
-                {
-                    Header: 'Investment Strategy',
-                    accessor: 'col1', // accessor is the "key" in the data
-                },
-                {
-                    Header: 'APY',
-                    accessor: 'col2',
-                },
-                {Header: 'Profit'}
-
-            ], rows: [
-                {
-                    col1: 'NBU Soft Staking',
-                    col2: '10%',
-
-                },
-                {
-                    col1: 'NBU Hard Staking - 60 Days',
-                    col2: '60%',
-
-                },
-                {
-                    col1: 'NBU Hard Staking - 180 Days',
-                    col2: '80',
-
-                }]
-        }
+            value: 0
+        };
+        this.handleChange = this.handleChange.bind(this);
     }
 
+    handleChange(event) {
+        this.setState({
+            value: event.target.value
+        });
+    }
 
     render() {
         return (
+
             <div>
-                <h1>Nimbus Profit/Loss Calculator</h1>
-                <App2></App2>
-
+                <div className="bg"></div>
+                <div className="bg bg2"></div>
+                <div className="bg bg3"></div>
                 <div>
-                    <label>Enter value : </label>
-                    <input type="textarea"
-                           name="textValue"
-                           onChange={this.handleChange}
-                    />
-                </div>
-                <TableK></TableK>
-                <div>
-                    <table {...this.state.columns} style={{border: 'solid 1px black'}}>
-                        <thead>
-                        {this.state.columns.map(headerGroup => (
-                            <tr {...headerGroup.getHeaderGroupProps()}>
-                                {headerGroup.headers.map(column => (
-                                    <th
-                                        {...column.getHeaderProps()}
-                                        style={{
-                                            borderBottom: 'solid 3px red',
-                                            color: 'black',
-                                        }}
-                                    >
-                                        {column.render('Header')}
-                                    </th>
-                                ))}
-                            </tr>
-
-                        ))}
-
-                        </thead>
-                        <tbody {...this.state.rows()}>
-                        {this.state.rows.map(row => {
-                            return (
-                                <tr {...row.getRowProps()}>
-                                    {row.cells.map(cell => {
-                                        return (
-                                            <td
-                                                {...cell.getCellProps()}
-                                                style={{
-                                                    padding: '10px',
-                                                    border: 'solid 1px gray',
-                                                }}
-                                            >
-                                                {cell.render('Cell')}
-                                            </td>
-                                        )
-                                    })}
+                    <h1>Nimbus Analysis Zone</h1>
+                    <App4></App4>
+                    <div className="container">
+                        <div className="item">
+                            <div>
+                                <label>Amount of NBU/GNBU     : </label>
+                                <input type="textarea"
+                                       name="textValue"
+                                       onChange={this.handleChange}
+                                />
+                            </div>
+                            <table>
+                                <tbody>
+                                <tr>
+                                    <th>Investment Strategy</th>
+                                    <th>APY</th>
+                                    <th>Profit</th>
                                 </tr>
-                            )
-                        })}
-                        </tbody>
-                    </table>
-                    <App></App>
+                                <tr>
+                                    <td>NBU Soft Staking</td>
+                                    <td>10%</td>
+                                    <td>{(0.1 * this.state.value).toFixed(1)}</td>
+                                </tr>
+                                <tr>
+                                    <td>NBU Hard Staking - 60 Days</td>
+                                    <td>60%</td>
+                                    <td>{(0.6 * this.state.value).toFixed(1)}</td>
+                                </tr>
+                                <tr>
+                                    <td>NBU Hard Staking - 180 Days</td>
+                                    <td>80%</td>
+                                    <td>{(0.8 * this.state.value).toFixed(1)}</td>
+                                </tr>
+                                <tr>
+                                    <td>GNBU Soft Staking </td>
+                                    <td>10%</td>
+                                    <td>{(0.1 * (this.state.value * 8)).toFixed(1)}</td>
+                                </tr>
+                                <tr>
+                                    <td>GNBU Hard Staking - 90 Days</td>
+                                    <td>28%</td>
+                                    <td>{(0.28 * (this.state.value * 8)).toFixed(1)}</td>
+                                </tr>
+                                <tr>
+                                    <td>GNBU Hard Staking - 180 Days</td>
+                                    <td>36%</td>
+                                    <td>{(0.36 * (this.state.value * 8)).toFixed(1)}</td>
+                                </tr>
+                                </tbody>
+                            </table><div className="item3"> <App2></App2></div>
+                            <div className="item3"> <App3></App3></div>
+                        </div>
+
+                        <div className="item1"><App></App></div>
+                    </div>
+                </div>
+
+
 
                 </div>
-            </div>
+
         );
     }
 }

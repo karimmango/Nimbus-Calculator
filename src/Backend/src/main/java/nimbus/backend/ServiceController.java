@@ -1,6 +1,6 @@
 package nimbus.backend;
 import org.springframework.web.bind.annotation.*;
-import Backend.Model.Service;
+import nimbus.backend.Model.Service;
 import java.util.Collection;
 import java.util.TreeMap;
 
@@ -16,6 +16,8 @@ public class ServiceController {
         serviceMap.put(1, new Service(60, "NBU Hard Staking 60 day"));
         serviceMap.put(2, new Service(80, "NBU Hard Staking 180 day"));
     }
+
+
 
     @GetMapping("/service")
     public Collection<Service> getAllProducts() {

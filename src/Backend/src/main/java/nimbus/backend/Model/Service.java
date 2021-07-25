@@ -1,4 +1,4 @@
-package Backend.Model;
+package nimbus.backend.Model;
 
 public class Service {
     private final float apy;
