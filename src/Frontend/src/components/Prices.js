@@ -1,5 +1,5 @@
 import React from "react";
-class TableK extends React.Component {
+class Prices extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -40,16 +40,16 @@ class TableK extends React.Component {
 
     render() {
         return (
-                <table>
-                    <th>Profit from arbitrage</th>
-                    <tr><td>From ETH to BSC: ${(parseFloat(this.state.Bprice)-parseFloat(this.state.price)).toFixed(8)} per NBU</td></tr>
-                    <tr><td>From BSC to ETH: ${(parseFloat(this.state.price)-parseFloat(this.state.Bprice)).toFixed(8)} per NBU</td></tr>
-                    <tr><td>From ETH to BSC: ${(parseFloat(this.state.GBprice)-parseFloat(this.state.Gprice)).toFixed(8)} per GNBU</td></tr>
-                    <tr><td>From BSC to ETH: ${(parseFloat(this.state.Gprice)-parseFloat(this.state.GBprice)).toFixed(8)} per GNBU</td></tr>
-                </table>
+            <table>
+                <th>Prices of Nimbus Tokens on Chains</th>
+                <tr><td>ETH Chain NBU: ${parseFloat(this.state.price).toFixed(8)} per NBU</td></tr>
+                <tr><td>BSC Chain NBU: ${parseFloat(this.state.Bprice).toFixed(8)} per NBU</td></tr>
+                <tr><td>ETH Chain GNBU: ${parseFloat(this.state.Gprice).toFixed(8)} per GNBU</td></tr>
+                <tr><td>BSC Chain GNBU: ${parseFloat(this.state.GBprice).toFixed(8)} per GNBU</td></tr>
+            </table>
 
         );
     }
 }
 
-export default TableK
+export default Prices

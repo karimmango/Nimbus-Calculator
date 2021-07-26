@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {AdvancedChart, SingleTicker, Ticker, TickerTape} from "react-tradingview-embed";
 import TableK from './components/table'
+import Prices from "./components/Prices";
 import './App.css'
 
 const App = () => <AdvancedChart widgetProps={{"theme": "light  ", "symbol": "WETHNBU", "interval": "1"}}/>;
@@ -80,19 +81,25 @@ class Example extends Component {
                                     <td>36%</td>
                                     <td>{(0.36 * (this.state.value * 8)).toFixed(1)}</td>
                                 </tr>
+                                <tr>
+                                    <td>Liquidity Providing</td>
+                                    <td>100%</td>
+                                    <td>{(1 * (this.state.value)).toFixed(1)}</td>
+                                </tr>
                                 </tbody>
                             </table><div className="item3"> <App2></App2></div>
                             <div className="item3"> <App3></App3></div>
                         </div>
-
-                        <div className="item1"><App></App></div>
+                        <div className="container2">
+                            <div className="item1"><App></App></div>
+                            <div className="container">
+                                <div className="item5"><Prices></Prices></div>
+                                <div className="item5"><TableK></TableK></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
-
-
                 </div>
-
         );
     }
 }
