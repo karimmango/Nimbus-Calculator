@@ -1,41 +1,25 @@
 import React from "react";
+import pricesService from "../Services/PricesService";
 class Prices extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            Bname: '',
             Bprice: '',
-            Bsymbol: '',
-            name: '',
             price: '',
-            symbol: '',
-            GBname: '',
             GBprice: '',
-            GBsymbol: '',
-            Gname: '',
             Gprice: '',
-            Gsymbol: ''
+
         };
-        fetch('http://localhost:8080/NBSC')
-            .then(response => response.json())
-            .then((response) => {
-                this.setState({Bname: response.name, Bprice: response.price, Bsymbol: response.symbol});
-            });
-        fetch('http://localhost:8080/NETH')
-            .then(response => response.json())
-            .then((response) => {
-                this.setState({name: response.name, price: response.price, symbol: response.symbol});
-            });
-        fetch('http://localhost:8080/GBSC')
-            .then(response => response.json())
-            .then((response) => {
-                this.setState({GBname: response.name, GBprice: response.price, GBsymbol: response.symbol});
-            });
-        fetch('http://localhost:8080/GETH')
-            .then(response => response.json())
-            .then((response) => {
-                this.setState({Gname: response.name, Gprice: response.price, Gsymbol: response.symbol});
-            });
+        pricesService.getNBSC().then(data => {
+            this.setState({Bprice: data['price']});
+        });
+        pricesService.getGBSC().then(data => {
+            this.setState({GBprice: data['price']});
+        });
+        pricesService.getNETH().then(data => {
+            this.setState({price: data[0]['price'], Gprice: data[1]['price']});
+        });
+
     }
 
     render() {

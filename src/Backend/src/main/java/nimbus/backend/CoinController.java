@@ -1,6 +1,5 @@
 package nimbus.backend;
 
-import ch.qos.logback.core.db.dialect.SybaseSqlAnywhereDialect;
 import nimbus.backend.Model.Coin;
 import org.glassfish.jersey.client.ClientConfig;
 import org.glassfish.jersey.logging.LoggingFeature;
@@ -53,10 +52,10 @@ public class CoinController {
         return coin;
     }
 
-    @GetMapping("/GETH")
-    public Coin getGnbuEthCoin() throws JSONException {
+    @GetMapping("/GN")
+    public Coin getGNCoin() throws JSONException {
         Client client = ClientBuilder.newClient( new ClientConfig().property(LoggingFeature.LOGGING_FEATURE_VERBOSITY_CLIENT, LoggingFeature.Verbosity.PAYLOAD_ANY  ));
-        WebTarget webTarget = client.target("https://api.nomics.com/v1/currencies/ticker?key=e825f16c7091cc7691064f37703f9fe3&ids=GNBU&interval=1d");
+        WebTarget webTarget = client.target("https://api.nomics.com/v1/currencies/ticker?key=e825f16c7091cc7691064f37703f9fe3&ids=GNBU&convert=NBU&interval=1d");
         Invocation.Builder invocationBuilder =  webTarget.request().accept(String.valueOf(MediaType.APPLICATION_JSON));
         String response = invocationBuilder.get(String.class);
         JSONArray obj = new JSONArray(response);
@@ -68,18 +67,24 @@ public class CoinController {
     }
 
     @GetMapping("/NETH")
-    public Coin getNbuEthCoin() throws JSONException {
+    public Coin[] getNbuEthCoin() throws JSONException {
         Client client = ClientBuilder.newClient( new ClientConfig().property(LoggingFeature.LOGGING_FEATURE_VERBOSITY_CLIENT, LoggingFeature.Verbosity.PAYLOAD_ANY  ));
-        WebTarget webTarget = client.target("https://api.nomics.com/v1/currencies/ticker?key=e825f16c7091cc7691064f37703f9fe3&ids=NBU&interval=1d");
-        Invocation.Builder invocationBuilder =  webTarget.request().accept(String.valueOf(MediaType.APPLICATION_JSON));
+        WebTarget webTarget = client.target("https://api.nomics.com/v1/currencies/ticker?key=e825f16c7091cc7691064f37703f9fe3&ids=NBU,GNBU&interval=1d");
+        Invocation.Builder invocationBuilder =  webTarget.request();
         String response = invocationBuilder.get(String.class);
         JSONArray obj = new JSONArray(response);
         String price = obj.getJSONObject(0).getString("price");
         String name = obj.getJSONObject(0).getString("name");
         String symbol = obj.getJSONObject(0).getString("symbol");
+        String Gprice = obj.getJSONObject(1).getString("price");
+        String Gname = obj.getJSONObject(1).getString("name");
+        String Gsymbol = obj.getJSONObject(1).getString("symbol");
+
+        Coin Gcoin = new Coin(Gprice,Gname, Gsymbol);
         Coin coin = new Coin(price,name, symbol);
+        Coin coins[] = { Gcoin, coin };
         System.out.println(coin.getName());
-        return coin;
+        return coins;
     }
 
 

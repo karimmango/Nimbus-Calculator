@@ -38,7 +38,7 @@
 }
 
 table, td{
-  border: 1px solid black;
+  border: 2px solid black;
   padding: 7px;
   font-family:monospace;
   font-size: 14px;
@@ -51,7 +51,7 @@ label{
 
 .container {
   padding: 20px;
-  border: 1px solid #333333;
+  border: 2px solid #333333;
   border-radius: 6px;
 
   display: flex;
@@ -64,7 +64,7 @@ label{
 }
 .container2 {
   padding: 20px;
-  border: 1px solid #333333;
+  border: 2px solid #333333;
   border-radius: 6px;
 
   display: flex;
@@ -135,7 +135,7 @@ h1 {
 .item {
   padding: 20px;
   border-radius: 6px;
-  border: 1px solid #333333;
+  border: 2px solid #333333;
   align-self: flex-start;
 }
 .item5 {
@@ -147,18 +147,18 @@ h1 {
 .item3 {
   padding: 15px;
   border-radius: 6px;
-  border: 1px solid #333333;
+  border: 2px solid #333333;
   align-self: flex-start;
 }
 .item4 {
   padding: 15px;
   border-radius: 6px;
-  border: 1px solid #333333;
+  border: 2px solid #333333;
   align-self: flex-end;
 }
 .item1 {
   padding: 15px;
   border-radius: 6px;
-  border: 1px solid #333333;
+  border: 2px solid #333333;
   width: 1000px;
 }

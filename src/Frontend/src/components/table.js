@@ -1,52 +1,56 @@
 import React from "react";
-class TableK extends React.Component {
+import pricesService from "../Services/PricesService";
+
+class TableK extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            Bname: '',
             Bprice: '',
-            Bsymbol: '',
-            name: '',
             price: '',
-            symbol: '',
-            GBname: '',
             GBprice: '',
-            GBsymbol: '',
-            Gname: '',
             Gprice: '',
-            Gsymbol: ''
+            value:0
+
         };
-        fetch('http://localhost:8080/NBSC')
-            .then(response => response.json())
-            .then((response) => {
-                this.setState({Bname: response.name, Bprice: response.price, Bsymbol: response.symbol});
-            });
-        fetch('http://localhost:8080/NETH')
-            .then(response => response.json())
-            .then((response) => {
-                this.setState({name: response.name, price: response.price, symbol: response.symbol});
-            });
-        fetch('http://localhost:8080/GBSC')
-            .then(response => response.json())
-            .then((response) => {
-                this.setState({GBname: response.name, GBprice: response.price, GBsymbol: response.symbol});
-            });
-        fetch('http://localhost:8080/GETH')
-            .then(response => response.json())
-            .then((response) => {
-                this.setState({Gname: response.name, Gprice: response.price, Gsymbol: response.symbol});
-            });
+        this.handleChange = this.handleChange.bind(this);
+
+        pricesService.getNBSC().then(data => {
+            this.setState({Bprice: data['price']});
+        });
+        pricesService.getGBSC().then(data => {
+            this.setState({GBprice: data['price']});
+        });
+        pricesService.getNETH().then(data => {
+            this.setState({price: data[0]['price'], Gprice: data[1]['price']});
+        });
+
+
     }
+    handleChange(event) {
+        this.setState({
+            value: event.target.value
+        });
+    }
+
+
 
     render() {
         return (
+                <div>
+                <label>Amount in USD: </label>
+                <input type="textarea"
+                       name="textValue"
+                       onChange={this.handleChange}
+                />
+
                 <table>
-                    <th>Profit from arbitrage</th>
-                    <tr><td>From ETH to BSC: ${(parseFloat(this.state.Bprice)-parseFloat(this.state.price)).toFixed(8)} per NBU</td></tr>
-                    <tr><td>From BSC to ETH: ${(parseFloat(this.state.price)-parseFloat(this.state.Bprice)).toFixed(8)} per NBU</td></tr>
-                    <tr><td>From ETH to BSC: ${(parseFloat(this.state.GBprice)-parseFloat(this.state.Gprice)).toFixed(8)} per GNBU</td></tr>
-                    <tr><td>From BSC to ETH: ${(parseFloat(this.state.Gprice)-parseFloat(this.state.GBprice)).toFixed(8)} per GNBU</td></tr>
+                    <tr><th>Profit from arbitrage</th><th>Total profit</th></tr>
+                    <tr><td>From ETH to BSC: ${(parseFloat(this.state.Bprice)-parseFloat(this.state.price)).toFixed(8)} per NBU</td><td>${(this.state.value *(parseFloat(this.state.Bprice)-parseFloat(this.state.price)).toFixed(8)).toFixed(4) }</td></tr>
+                    <tr><td>From BSC to ETH: ${(parseFloat(this.state.price)-parseFloat(this.state.Bprice)).toFixed(8)} per NBU</td><td>${(this.state.value *(parseFloat(this.state.price)-parseFloat(this.state.Bprice)).toFixed(8)).toFixed(4) }</td></tr>
+                    <tr><td>From ETH to BSC: ${(parseFloat(this.state.GBprice)-parseFloat(this.state.Gprice)).toFixed(8)} per GNBU</td><td>${(this.state.value *(parseFloat(this.state.GBprice)-parseFloat(this.state.Gprice)).toFixed(8)).toFixed(4) }</td></tr>
+                    <tr><td>From BSC to ETH: ${(parseFloat(this.state.Gprice)-parseFloat(this.state.GBprice)).toFixed(8)} per GNBU</td><td>${(this.state.value *(parseFloat(this.state.Gprice)-parseFloat(this.state.GBprice)).toFixed(8)).toFixed(4) }</td></tr>
                 </table>
+                </div>
 
         );
     }
