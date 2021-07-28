@@ -4,53 +4,74 @@ import TableK from './components/table'
 import './App.css'
 import Prices from "./components/Prices";
 import pricesService from "./Services/PricesService";
+import {FormControlLabel, FormGroup, Grid, Switch} from "@material-ui/core";
+import SwitchK from "./components/Switch";
 
 class AdvancedChartComponent extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = {
-            symbol:"WETHNBU"
+            symbol:"WETHNBU",
+            setChecked: false
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.toggleChecked = this.toggleChecked.bind(this);
     }
     handleChange(event) {
         this.setState({
             symbol: event.target.value
         });}
 
+    toggleChecked (event) {
+
+        if(this.state.setChecked===false){
+            this.setState({symbol:"GNBUWETH",setChecked:true });
+        }else{
+            this.setState({symbol:"WETHNBU", setChecked:false});
+
+
+        }};
+
     render() {
-        return (<div><div><label>Display GNBU <input type="checkbox" onClick={this.handleChange} value="GNBUWETH" /></label>
-            <label>Display NBU</label> <input type="checkbox" onClick={this.handleChange} value="WETHNBU" /></div>
-            <AdvancedChart widgetProps={{"theme": "dark  ", "symbol": this.state.symbol, "interval": "1"}}/></div>);
+        return (<div><FormGroup>
+            <Grid component="label" container alignItems="center" spacing={1}>
+                <Grid item>WETH/NBU</Grid>
+                <Grid item>
+
+                <Switch checked={this.state.setChecked} onChange={this.toggleChecked} style={{"color":"Primary"}}/>
+
+
+                </Grid>
+                <Grid item>GNBU/WETH</Grid>
+            </Grid>
+        </FormGroup>
+            <AdvancedChart widgetProps={{"theme": "dark", "symbol": this.state.symbol, "interval": "1"}}/></div>);
     }
 }
 class SingleTickerNETHComponent extends React.PureComponent {
     render() {
-        return <SingleTicker widgetProps={{"theme": "light  ", "symbol": "WETHNBU", "interval": "1"}}/>;
+        return <SingleTicker widgetProps={{"theme": "dark", "symbol": "WETHNBU", "interval": "1"}}/>;
     }
 }
 
 class SingleTickerGETHComponent extends React.PureComponent {
     render() {
-        return <SingleTicker widgetProps={{"theme": "light  ", "symbol": "GNBUWETH", "interval": "1"}}/>;
+        return <SingleTicker widgetProps={{"theme": "dark", "symbol": "GNBUWETH", "interval": "1"}}/>;
     }
 }
 class SingleTickerGNComponent extends React.PureComponent {
     render() {
-        return <SingleTicker widgetProps={{"theme": "light  ", "symbol": "GNBUNBU", "interval": "1"}}/>;
+        return <SingleTicker widgetProps={{"theme": "dark  ", "symbol": "GNBUNBU", "interval": "1"}}/>;
     }
 }
 
 class TickerTapeComponent extends React.PureComponent {
     render() {
-        return <TickerTape widgetProps={{"theme": "light  ", "symbol": "GNBUWETH", "interval": "1"}}/>;
+        return <TickerTape widgetProps={{"theme": "dark", "symbol": "GNBUWETH", "interval": "1"}}/>;
     }
 }
-//const App = () => <AdvancedChart widgetProps={{"theme": "light  ", "symbol": "WETHNBU", "interval": "1"}}/>;
-//const App2 = () => <SingleTicker widgetProps={{"theme": "light", "symbol": "WETHNBU", "interval": "1"}}/>;
-//const App3 = () => <SingleTicker widgetProps={{"theme": "light", "symbol": "GNBUWETH", "interval": "1"}}/>;
-//const App4 = () => <TickerTape widgetProps={{"theme": "light", "symbol": "GNBUWETH", "interval": "1"}}/>;
+
 
 
 class Example extends React.PureComponent {
@@ -95,49 +116,49 @@ class Example extends React.PureComponent {
                             <table>
                                 <tbody>
                                 <tr>
-                                    <th>Investment Strategy</th>
+                                    <th>Reward Stream</th>
                                     <th>APY</th>
-                                    <th>Profit in NBU</th>
+                                    <th>Reward in NBU after 1 year</th>
                                 </tr>
                                 <tr>
                                     <td>NBU Soft Staking</td>
                                     <td>10%</td>
-                                    <td>{(0.1 * this.state.value).toFixed(1)}</td>
+                                    <td align="center">{(0.1 * this.state.value).toFixed(1)}</td>
                                 </tr>
                                 <tr>
-                                    <td>NBU Hard Staking - 60 Days</td>
+                                    <td>NBU Hard Staking - 60 Days Minimum Vesting</td>
                                     <td>60%</td>
-                                    <td>{(0.6 * this.state.value).toFixed(1)}</td>
+                                    <td align="center">{(0.6 * this.state.value).toFixed(1)}</td>
                                 </tr>
                                 <tr>
-                                    <td>NBU Hard Staking - 180 Days</td>
+                                    <td>NBU Hard Staking - 180 Days Minimum Vesting</td>
                                     <td>80%</td>
-                                    <td>{(0.8 * this.state.value).toFixed(1)}</td>
+                                    <td align="center">{(0.8 * this.state.value).toFixed(1)}</td>
                                 </tr>
                                 <tr>
                                     <td>GNBU Soft Staking </td>
                                     <td>10%</td>
-                                    <td>{((0.1 * (this.state.value))*this.state.rate).toFixed(1)}</td>
+                                    <td align="center">{((0.1 * (this.state.value))*this.state.rate).toFixed(1)}</td>
                                 </tr>
                                 <tr>
-                                    <td>GNBU Hard Staking - 90 Days</td>
+                                    <td>GNBU Hard Staking - 90 Days Minimum Vesting</td>
                                     <td>28%</td>
-                                    <td>{((0.28 * (this.state.value))*this.state.rate).toFixed(1)}</td>
+                                    <td align="center">{((0.28 * (this.state.value))*this.state.rate).toFixed(1)}</td>
                                 </tr>
                                 <tr>
-                                    <td>GNBU Hard Staking - 180 Days</td>
+                                    <td>GNBU Hard Staking - 180 Days Minimum Vesting</td>
                                     <td>36%</td>
-                                    <td>{((0.36 * (this.state.value))*this.state.rate).toFixed(1)}</td>
+                                    <td align="center">{((0.36 * (this.state.value))*this.state.rate).toFixed(1)}</td>
                                 </tr>
                                 <tr>
                                     <td>Liquidity Providing- NBU</td>
                                     <td>100%</td>
-                                    <td>{(1 * (this.state.value)).toFixed(1)}</td>
+                                    <td align="center">{(1 * (this.state.value)).toFixed(1)}</td>
                                 </tr>
                                 <tr>
                                     <td>Liquidity Providing- GNBU</td>
                                     <td>100%</td>
-                                    <td>{((1 * (this.state.value))*this.state.rate).toFixed(1)}</td>
+                                    <td align="center">{((1 * (this.state.value))*this.state.rate).toFixed(1)}</td>
                                 </tr>
                                 </tbody>
                             </table><div className="item3"> <SingleTickerNETHComponent ></SingleTickerNETHComponent></div>

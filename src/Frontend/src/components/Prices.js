@@ -25,7 +25,7 @@ class Prices extends React.Component {
     render() {
         return (
             <table>
-                <th>Prices of Nimbus Tokens on Chains</th>
+                <th>Market Value of Nimbus Tokens on Chains</th>
                 <tr><td>ETH Chain NBU: ${parseFloat(this.state.price).toFixed(8)} per NBU</td></tr>
                 <tr><td>BSC Chain NBU: ${parseFloat(this.state.Bprice).toFixed(8)} per NBU</td></tr>
                 <tr><td>ETH Chain GNBU: ${parseFloat(this.state.Gprice).toFixed(8)} per GNBU</td></tr>
