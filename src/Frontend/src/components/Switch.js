@@ -9,7 +9,8 @@ class SwitchK extends React.PureComponent {
         super(props);
         this.state= {
             symbol:"NBUWETH",
-            setChecked: false
+            setChecked: false,
+            color:"black"
         };
 
 
@@ -17,9 +18,9 @@ class SwitchK extends React.PureComponent {
     toggleChecked = () => {
 
         if(this.state.setChecked===false){
-            this.setState({symbol:"WETHGNBU",setChecked:true });
+            this.setState({symbol:"WETHGNBU",setChecked:true, color:"grey" });
         }else{
-            this.setState({symbol:"NBUWETH", setChecked:true});
+            this.setState({symbol:"NBUWETH", setChecked:true, color:"black"});
 
 
         }};

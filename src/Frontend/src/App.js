@@ -12,7 +12,8 @@ class AdvancedChartComponent extends React.PureComponent {
         super(props);
         this.state = {
             symbol:"WETHNBU",
-            setChecked: false
+            setChecked: false,
+            color:"black"
         };
 
         this.handleChange = this.handleChange.bind(this);
@@ -26,9 +27,9 @@ class AdvancedChartComponent extends React.PureComponent {
     toggleChecked (event) {
 
         if(this.state.setChecked===false){
-            this.setState({symbol:"GNBUWETH",setChecked:true });
+            this.setState({symbol:"GNBUWETH",setChecked:true, color:"grey" });
         }else{
-            this.setState({symbol:"WETHNBU", setChecked:false});
+            this.setState({symbol:"WETHNBU", setChecked:false, color:"black"});
 
 
         }};
@@ -39,7 +40,7 @@ class AdvancedChartComponent extends React.PureComponent {
                 <Grid item>WETH/NBU</Grid>
                 <Grid item>
 
-                <Switch checked={this.state.setChecked} onChange={this.toggleChecked} style={{"color":"Primary"}}/>
+                <Switch checked={this.state.setChecked} onChange={this.toggleChecked} color={this.state.color}/>
 
 
                 </Grid>
@@ -108,7 +109,7 @@ class Example extends React.PureComponent {
                         <div className="item">
                             <div>
                                 <label>Amount of NBU/GNBU     : </label>
-                                <input type="textarea"
+                                <input type="number"
                                        name="textValue"
                                        onChange={this.handleChange}
                                 />
