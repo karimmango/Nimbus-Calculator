@@ -6,7 +6,7 @@ class PricesService {
         if (this.prices.NBSC) {
             return this.prices.NBSC;
         }
-        this.prices.NBSC = fetch('http://localhost:8080/NBSC')
+        this.prices.NBSC = fetch("http://"+window.location.hostname + ":8080/NBSC")
             .then(response => response.json());
         return this.prices.NBSC;
     }
@@ -15,7 +15,7 @@ class PricesService {
         if (this.prices.GBSC) {
             return this.prices.GBSC;
         }
-        this.prices.GBSC = fetch('http://localhost:8080/GBSC')
+        this.prices.GBSC = fetch("http://"+window.location.hostname + ":8080/GBSC")
             .then(response => response.json());
         return this.prices.GBSC;
     }
@@ -26,7 +26,7 @@ class PricesService {
             return this.eth ;
         }
 
-        this.eth = fetch('http://localhost:8080/NETH')
+        this.eth = fetch("http://"+ window.location.hostname + ":8080/NETH")
             .then(response => response.json());
         return this.eth;
     }
@@ -35,7 +35,7 @@ class PricesService {
         if (this.prices.GN) {
             return this.prices.GN;
         }
-        this.prices.GN = fetch('http://localhost:8080/GN')
+        this.prices.GN = fetch("http://" + window.location.hostname + ":8080/GN")
             .then(response => response.json());
         return this.prices.GN;
     }

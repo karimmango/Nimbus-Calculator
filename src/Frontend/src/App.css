@@ -45,8 +45,9 @@ table, td{
   color: white;
   background-color: #131722;
   box-shadow: 0 6px 6px #000;
-  margin-bottom: 7px;
+  margin-bottom: 9px;
   border-radius: 6px;
+  max-width: 370px;
 }
 label{
   font-family:monospace;
@@ -60,15 +61,12 @@ label{
   padding: 15px;
   border: 2px solid #333333;
   border-radius: 5px;
-
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: flex-start;
   box-shadow: 0 2px 3px #000;
-
-
-
+  flex-wrap: wrap;
 }
 .container2 {
   padding: 15px;
@@ -81,11 +79,12 @@ label{
   align-items: stretch;
   align-self: flex-start;
   box-shadow: 0 2px 3px #000;
-
+  width: 65%;
 
 }
 html {
   height:100%;
+  width: 100%;
 }
 
 th {
@@ -95,7 +94,7 @@ th {
 
 
 .bg {
-  animation:slide 3s ease-in-out infinite alternate;
+  animation:slide 13s ease-in-out infinite alternate;
   background-image: linear-gradient(-60deg, #101121 50%, #ffffff 50%);
   bottom:0;
   left:-50%;
@@ -105,14 +104,17 @@ th {
   top:0;
   z-index:-1;
 }
+input{
+  margin-bottom: 4px;
+}
 
 .bg2 {
   animation-direction:alternate-reverse;
-  animation-duration:4s;
+  animation-duration:15s;
 }
 
 .bg3 {
-  animation-duration:5s;
+  animation-duration:17s;
 }
 
 .content {
@@ -148,12 +150,15 @@ h1 {
   align-self: flex-start;
   box-shadow: 0 2px 3px #000;
   margin-right: 6px;
+
 }
 .item5 {
   padding: 5px;
   align-self: flex-end;
   flex-basis: auto;
   margin-bottom: 7px;
+
+
 
 }
 .item3 {
@@ -163,6 +168,7 @@ h1 {
   align-self: flex-start;
   box-shadow: 0 2px 3px #000;
   margin-bottom: 7px;
+
 }
 .item4 {
   padding: 15px;
@@ -176,7 +182,7 @@ h1 {
   padding: 15px;
   border-radius: 6px;
   border: 2px solid #333333;
-  width: 1000px;
   box-shadow: 0 2px 3px #000;
   margin-bottom: 7px;
+  width: auto;
 }

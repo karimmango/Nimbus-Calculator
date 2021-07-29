@@ -83,7 +83,6 @@ public class CoinController {
         Coin Gcoin = new Coin(Gprice,Gname, Gsymbol);
         Coin coin = new Coin(price,name, symbol);
         Coin coins[] = { Gcoin, coin };
-        System.out.println(coin.getName());
         return coins;
     }
 
