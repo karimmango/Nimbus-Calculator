@@ -5,7 +5,7 @@ COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
 COPY src src
-
+RUN chmod +x mvnw
 RUN ./mvnw install -DskipTests
 
 FROM openjdk:12-alpine
