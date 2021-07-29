@@ -1,0 +1,15 @@
+name: nimbus-calculator
+region: fra
+services:
+  - dockerfile_path: src/Backend/Dockerfile
+    github:
+      branch: master
+      deploy_on_push: true
+      repo: karimmango/Nimbus-Calculator
+    http_port: 8080
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    name: nimbus-calculator
+    routes:
+      - path: /
+    source_dir: /src/Backend
