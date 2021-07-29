@@ -9,19 +9,19 @@ services:
     http_port: 8080
     instance_count: 1
     instance_size_slug: basic-xxs
-    name: nimbus-calculator
+    name: nimbus-calculator-backend
     routes:
-      - path: /
-    source_dir: /src/Backend
+      - path: /api
+    source_dir: src/Backend
   - dockerfile_path: src/Frontend/Dockerfile
-      github:
+    github:
         branch: master
         deploy_on_push: true
         repo: karimmango/Nimbus-Calculator
-      http_port: 80
-      instance_count: 1
-      instance_size_slug: basic-xxs
-      name: nimbus-calculator
-      routes:
-        - path: /
-      source_dir: /src/Frontend
+    http_port: 80
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    name: nimbus-calculator-frontend
+    routes:
+      - path: /
+    source_dir: src/Frontend
